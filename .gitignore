@@ -1,0 +1,7 @@
+# Python
+__pycache__/
+*.pyc
+
+# Local lab files
+submission/outputs.txt
+submission/results.txt
