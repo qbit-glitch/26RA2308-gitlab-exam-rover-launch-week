@@ -22,3 +22,8 @@ def stop():
 def turn_right(speed):
     """Turn right on the spot."""
     return ("RIGHT", speed)
+
+
+def turn_left(speed):
+    """Turn left on the spot."""
+    return ("LEFT", speed)
