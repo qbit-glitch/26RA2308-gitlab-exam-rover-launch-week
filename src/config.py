@@ -1,2 +1,2 @@
 # Speed setting for the rover
-SPEED = 10
+SPEED = 25
