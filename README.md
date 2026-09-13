@@ -16,3 +16,8 @@ Firmware and tools for the Kestrel-1 rover.
 ## Quick check
 
     python3 tests/test_rover.py
+
+## Controller module
+
+`src/controller.py` holds the motion commands: `forward`, `backward`, `stop`, `turn_right` and `turn_left`.
+Every command returns a (name, speed) pair for the motor driver.
