@@ -1,0 +1,154 @@
+##############################################################################
+#  ROVER LAUNCH WEEK LAB EXAM  -  SUBMISSION FILE (20 marks)
+#
+#  1. Copy this file:    cp submission/outputs.template.txt submission/outputs.txt
+#  2. Do the tasks in ASSIGNMENT.md, in order.
+#  3. After each command, paste what the terminal printed UNDER the matching
+#     "--- N.M" line, replacing the line "(paste output here)".
+#  4. Do not edit or delete the "=== TASK" and "--- N.M" lines.
+#  5. Check your work at any time (from branch main):    python3 tests/grade.py
+##############################################################################
+
+Name   :
+Reg No :
+
+
+=== TASK 1 : Arrive and keep the data out  (2 marks) ===
+
+--- 1.1  git config --local --list ---
+(paste output here)
+
+--- 1.2  ls .git ---
+(paste output here)
+
+# Q1 (type the answer on the ANSWER-1 line below): which folder inside .git holds all the commits?
+ANSWER-1 :
+
+--- 1.3  git check-ignore -v data/raw/run_043.csv ---
+(paste output here)
+
+--- 1.4  git rm --cached data/raw/run_042.csv   then   git status --short   then   ls data/raw ---
+(paste output here)
+
+--- 1.5  git commit -m "chore: ignore raw data and stop tracking run_042" ---
+(paste output here)
+
+
+=== TASK 2 : Stage, commit and read the history  (4 marks) ===
+
+--- 2.1  git add -p src/controller.py   then   git diff --staged   then   git status --short ---
+(paste output here)
+
+--- 2.2  git commit -m "docs(control): label controller version" ---
+(paste output here)
+
+--- 2.3  git commit -am "feat(control): add speed clamp" ---
+(paste output here)
+
+--- 2.4  git commit --amend -m "feat(control): clamp motor speed to 0-255" ---
+(paste output here)
+
+--- 2.5  git mv NOTES.txt docs/team-notes.txt   then   git commit -m "refactor: move team notes into docs"   then   git log --oneline --follow -- docs/team-notes.txt ---
+(paste output here)
+
+
+=== TASK 3 : Undo, recover and shelve  (3 marks) ===
+
+--- 3.1  git status --short   then   git restore src/controller.py   then   git status --short ---
+(paste output here)
+
+--- 3.2  git reset --hard HEAD~1   then   git status --short ---
+(paste output here)
+
+--- 3.3  git reflog -5 ---
+(paste output here)
+
+# Q2 (type the answer on the ANSWER-2 line below): SHA of the commit "fix(control): raise turn gain to 9.9"   (at least 7 characters)
+ANSWER-2 :
+
+--- 3.4  git reset --hard <SHA of ANSWER-2>   then   cat params.txt ---
+(paste output here)
+
+--- 3.5  git revert --no-edit HEAD   then   cat params.txt ---
+(paste output here)
+
+--- 3.6  git stash push -m "wip: tuning turn gain"   then   git stash list   then   git stash pop   then   git stash list   then   git commit -am "fix(control): set turn gain to 3.0" ---
+(paste output here)
+
+
+=== TASK 4 : Branches and merges  (4 marks) ===
+
+--- 4.1  git branch -a ---
+(paste output here)
+
+# Q3 (type the answer on the ANSWER-3 line below): how many branches, apart from main, does the shared copy hold under remotes/origin/ ?
+ANSWER-3 :
+
+--- 4.2  git switch -c feature/path-planning   then   git commit -m "feat(nav): add path planner stub"   then   git switch main   then   ls tools ---
+(paste output here)
+
+--- 4.3  git switch --detach v0.1.0   then   git commit -m "temp: experiment from old commit"   then   git switch -c experiment/detached-recovery   then   git log --oneline -2 ---
+(paste output here)
+
+# Q4 (type the answer on the ANSWER-4 line below): the SHA printed in square brackets by the commit made while HEAD was detached   (at least 7 characters)
+ANSWER-4 :
+
+--- 4.4  git merge feature/logging   then   git branch -d feature/logging ---
+(paste output here)
+
+--- 4.5  git merge feature/battery -m "merge: battery" ---
+(paste output here)
+
+--- 4.6  git tree   then   git cat-file -p HEAD ---
+(paste output here)
+
+# Q5 (type the answer on the ANSWER-5 line below): the SECOND parent line of the merge commit: its SHA   (at least 7 characters)
+ANSWER-5 :
+
+
+=== TASK 5 : Conflict, abort and rebase  (3 marks) ===
+
+--- 5.1  git commit -am "perf(sensor): set echo timeout to 40 ms" ---
+(paste output here)
+
+--- 5.2  git merge origin/fix/echo-timeout   then   git status   then   cat src/limits.py   (it is supposed to stop) ---
+(paste output here)
+
+--- 5.3  python3 tests/test_rover.py   then   grep -c "<<<<<<<" src/limits.py   then   git add src/limits.py   then   git commit -m "merge: settle echo timeout at 30 ms" ---
+(paste output here)
+
+--- 5.4  git merge origin/feature/fast-mode   then   git merge --abort   then   git status ---
+(paste output here)
+
+--- 5.5  git rebase main   then   git log --oneline --graph -4 ---
+(paste output here)
+
+
+=== TASK 6 : Your own remote, a rejected push and a release  (4 marks) ===
+
+--- 6.1  git remote -v ---
+(paste output here)
+
+--- 6.2  git push -u origin main   then   git branch -vv ---
+(paste output here)
+
+# Q6 (type the answer on the ANSWER-6 line below): which remote name now points to the COURSE repository?
+ANSWER-6 :
+
+--- 6.3  git fetch origin   then   git status   then   git pull origin main ---
+(paste output here)
+
+--- 6.4  git commit -am "chore: start version 0.3-dev"   then   git push origin main   (it is supposed to be rejected) ---
+(paste output here)
+
+--- 6.5  git pull --rebase origin main   then   git log --oneline --graph -4   then   git push origin main ---
+(paste output here)
+
+# Q7 (type the answer on the ANSWER-7 line below): SHA of Ben's commit "docs: add field test note"   (at least 7 characters)
+ANSWER-7 :
+
+--- 6.6  git tag -a v0.2.0 -m "Second field release of Kestrel-1"   then   git tag   then   git push origin v0.2.0   then   git ls-remote --tags origin ---
+(paste output here)
+
+# Q8 (type the answer on the ANSWER-8 line below): SemVer: you are at v1.4.2 and make (a) a bug fix, (b) a new compatible feature, (c) a breaking change. Give the three next versions, separated by spaces.
+ANSWER-8 :
